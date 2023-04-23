@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                             .size(55.dp)
                             .clip(CircleShape)
                     )
-                    Text(text = name, fontFamily = FontFamily.Comfortaa)
+                    Text(text = name)
                 }
                 }
             }
