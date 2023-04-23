@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                             .size(55.dp)
                             .clip(CircleShape)
                     )
-                    Text(text = name)
+                    Text(text = name, modifier = Modifier.padding(start = 16.dp))
                 }
                 }
             }
