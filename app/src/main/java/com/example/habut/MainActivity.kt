@@ -2,12 +2,16 @@ package com.example.habut
 
 import android.graphics.fonts.FontFamily
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -28,16 +32,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //данные из базы данных подключать
         setContent {
-            ListItem(name = "Название")
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+                ListItem(name = "Название")
+            }
         }
     }
     @Composable
     private  fun ListItem(name: String){
         Card(
             modifier = Modifier
-                .height(95.dp)
+                .height(80.dp)
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 4.dp)
+                .clickable {
+                    Log.d("MyLog", "Жмакнули")
+                },
             shape = RoundedCornerShape(100.dp),
             elevation = 3.dp
         ) {
@@ -52,7 +71,7 @@ class MainActivity : ComponentActivity() {
                             .size(55.dp)
                             .clip(CircleShape)
                     )
-                    Text(text = name, modifier = Modifier.padding(start = 16.dp))
+                    Text(text = name, modifier = Modifier.padding(start = 30.dp))
                 }
                 }
             }
