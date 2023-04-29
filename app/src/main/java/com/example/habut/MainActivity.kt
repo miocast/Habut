@@ -9,11 +9,15 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,10 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.habut.ui.theme.Cosmos100
-import com.example.habut.ui.theme.HabutTheme
-import com.example.habut.ui.theme.Violet100
-import com.example.habut.ui.theme.comfortaa
+import com.example.habut.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,7 @@ class MainActivity : ComponentActivity() {
                     VerticalGradient()
                 }
             }
+
             Column(modifier = Modifier
                 .verticalScroll(rememberScrollState())) {
                 Text(text = "Твои привычки",
@@ -60,7 +62,6 @@ class MainActivity : ComponentActivity() {
 
                 ListItem(name = "Название")
                 ListItem(name = "Название")
-
             }
         }
     }
@@ -77,8 +78,13 @@ class MainActivity : ComponentActivity() {
     }
 
 
+
+
+
+
     @Composable
     private  fun ListItem(name: String){
+
         Card(
             modifier = Modifier
                 .height(80.dp)
@@ -92,23 +98,33 @@ class MainActivity : ComponentActivity() {
         ) {
             Box {
                 Row (verticalAlignment = Alignment.CenterVertically){
+                    var isExpanded by remember {
+                        mutableStateOf(false)
+                    }
 
-                    Image(
-                        painter = painterResource(id = R.drawable.violet),
-                        contentDescription = "violet",
-                        contentScale = ContentScale.Crop,
+                    var color = remember {
+                        mutableStateOf(Violet200)
+                    }
+
+                    Box(
                         modifier = Modifier
-                            .padding(8.dp)
-                            .size(50.dp)
-                            .clip(CircleShape)
-                    )
+                            .padding(5.dp)
+                            .size(56.dp)
+                            .background(color = color.value, shape = CircleShape)
+                            .clickable {
+                                isExpanded = !isExpanded
+                            }
+                    ){
+                        if(isExpanded) color.value = Violet200 else color.value = Cosmos100
+                    }
+
 
                     Text(text = name, color = Violet100,fontFamily = comfortaa, modifier = Modifier.padding(start = 30.dp))
-                }
                 }
             }
         }
     }
+}
 
 
 
