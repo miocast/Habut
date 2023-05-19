@@ -46,9 +46,6 @@ fun BottomNavigationBar(
                 unselectedContentColor = Color.Gray
 
                 )
-
-
-                
             }
         }
     }

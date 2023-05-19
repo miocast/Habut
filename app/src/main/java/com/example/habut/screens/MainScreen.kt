@@ -57,12 +57,9 @@ fun MainScreen(){
         }
     }
 
-//    val context = LocalContext.current
+
     val calendar = Calendar.getInstance()
 
-//    var selectedDateText by remember { mutableStateOf("") }
-
-// Fetching current year, month and day
     val year = calendar[Calendar.YEAR]
     val month = calendar[Calendar.MONTH]
     val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
@@ -81,7 +78,7 @@ fun MainScreen(){
             horizontalArrangement = Arrangement.SpaceBetween){
             Row(modifier = Modifier
                 .padding(start = 30.dp, top = 10.dp)
-                .background(Color.Blue)
+//                .background(Color.Blue)
             ) {
                 Text(
                     text = "$dayOfMonth",
@@ -90,9 +87,7 @@ fun MainScreen(){
                     color = Color.White
                 )
                 Column(modifier = Modifier
-//                    .fillMaxHeight()
                     .padding(top = 19.dp)
-                    .background(Color.Red)
                 ){
                     Text(
                         text = "$year",
@@ -125,24 +120,13 @@ fun MainScreen(){
                     Icons.Filled.Settings,
                     modifier = Modifier
                         .padding(top = 30.dp, start = 0.dp, end = 30.dp)
-                        .size(50.dp)
-                        .background(Color.Yellow),
+                        .size(50.dp),
+//                        .background(Color.Yellow),
                     contentDescription = "Настройки",
                     tint = Color.White
                 )
             }
-
-
-
         }
-//        Text(text = "Твои привычки",
-//            modifier = Modifier
-//                .padding(top = 70.dp, bottom = 45.dp)
-//                .fillMaxHeight(0.3f),
-//            fontFamily = comfortaa,
-//            color = Color.White,
-//            textAlign = TextAlign.Center,
-//            fontSize = 30.sp)
 
         TrackerItemsList(itemList = getListItems())
 
@@ -151,6 +135,7 @@ fun MainScreen(){
         Box(){
             FloatingActionButton(
                 onClick = {
+                          //кнопка добавить
 
 //                Toast.makeText(this@Column, "Кнопка нажата", Toast.LENGTH_SHORT)
 //                    .show()
@@ -169,20 +154,29 @@ fun MainScreen(){
 
 @Composable
 fun TrackerItemsList(itemList: List<TrackerItems>){
+
     val deletedItem = remember { mutableStateListOf<TrackerItems>() }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
-            .background(color = Color.White),
+            .height(100.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-
     ) {
-        Text(text = "Список ???")
+        Text(modifier = Modifier
+                .padding(top = 10.dp),
+            text = "Твои привычки",
+            fontFamily = comfortaa,
+            color = Color.White,
+            fontSize = 30.sp)
     }
+
     Column() {
-        LazyColumn(modifier = Modifier.fillMaxWidth()){
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
             itemsIndexed(items = itemList,
             itemContent = {_, item ->
                 AnimatedVisibility(
@@ -230,7 +224,8 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                                     fontFamily = comfortaa,
                                     modifier = Modifier.padding(start = 30.dp)
                                 )
-                                IconButton(onClick = {
+                                IconButton(modifier = Modifier.padding(end = 10.dp),
+                                    onClick = {
                                     deletedItem.add(item)
                                 }) {
                                     Icon(imageVector = Icons.Filled.Delete, contentDescription = "Удалить трекер")
