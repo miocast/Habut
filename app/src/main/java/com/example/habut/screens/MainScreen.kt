@@ -58,13 +58,7 @@ fun MainScreen(){
     }
 
 
-    val calendar = Calendar.getInstance()
 
-    val year = calendar[Calendar.YEAR]
-    val month = calendar[Calendar.MONTH]
-    val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
-
-    var stringMonth: String? = null
 
 
 
@@ -80,46 +74,21 @@ fun MainScreen(){
                 .padding(start = 30.dp, top = 10.dp)
 //                .background(Color.Blue)
             ) {
-                Text(
-                    text = "$dayOfMonth",
-                    style = TextStyle(fontSize = 50.sp),
-                    fontFamily = comfortaa,
-                    color = Color.White
-                )
-                Column(modifier = Modifier
-                    .padding(top = 19.dp)
-                ){
-                    Text(
-                        text = "$year",
-                        style = TextStyle(fontSize = 15.sp),
-                        fontFamily = comfortaa,
-                        color = Color.White
-                    )
-                    when (month){
-                        4 -> stringMonth = "мая"
-                        5 -> stringMonth = "июня"
-                        6 -> stringMonth = "июля"
-                    }
-                    Text(
-                        text = "$stringMonth",
-                        style = TextStyle(fontSize = 15.sp),
-                        fontFamily = comfortaa,
-                        color = Color.White
-                    )
 
-                }
+
+                CurrentDate()
             }
 
             IconButton(
                 onClick = {
-
-                }
+                }, modifier = Modifier
+                    .padding(top = 30.dp, start = 0.dp, end = 30.dp)
             ) {
                 Icon(
 //                        painter = painterResource(id = R.drawable.ic_sync),
                     Icons.Filled.Settings,
                     modifier = Modifier
-                        .padding(top = 30.dp, start = 0.dp, end = 30.dp)
+//                        .padding(top = 30.dp, start = 0.dp, end = 30.dp)
                         .size(50.dp),
 //                        .background(Color.Yellow),
                     contentDescription = "Настройки",
@@ -130,25 +99,6 @@ fun MainScreen(){
 
         TrackerItemsList(itemList = getListItems())
 
-        
-
-        Box(){
-            FloatingActionButton(
-                onClick = {
-                          //кнопка добавить
-
-//                Toast.makeText(this@Column, "Кнопка нажата", Toast.LENGTH_SHORT)
-//                    .show()
-            },
-                backgroundColor = Violet200,
-                elevation = FloatingActionButtonDefaults.elevation(
-                    defaultElevation = 8.dp,
-                    pressedElevation = 12.dp
-                )
-            ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Кнопка добавить", tint = Color.White)
-            }
-        }
     }
 }
 
@@ -160,7 +110,7 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(120.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -170,20 +120,25 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
             fontFamily = comfortaa,
             color = Color.White,
             fontSize = 30.sp)
+
     }
 
     Column() {
+
+
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Top
         ){
             itemsIndexed(items = itemList,
             itemContent = {_, item ->
-                AnimatedVisibility(
-                    visible = !deletedItem.contains(item),
-                    enter = expandVertically(),
-                    exit = shrinkVertically(animationSpec = tween(durationMillis = 1000))
-                ) {
+//                AnimatedVisibility(
+//                    visible = !deletedItem.contains(item),
+//                    enter = expandVertically(),
+//                    exit = shrinkVertically(animationSpec = tween(durationMillis = 200))
+//                )
+//                {
                     Card(
                         modifier = Modifier
                             .height(80.dp)
@@ -197,9 +152,9 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                     ) {
                         Box {
                             Row (verticalAlignment = Alignment.CenterVertically){
-                                var isExpanded by remember {
-                                    mutableStateOf(false)
-                                }
+//                                var isExpanded by remember {
+//                                    mutableStateOf(false)
+//                                }
 
                                 var color = remember {
                                     mutableStateOf(Violet200)
@@ -210,11 +165,11 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                                         .padding(5.dp)
                                         .size(56.dp)
                                         .background(color = color.value, shape = CircleShape)
-                                        .clickable {
-                                            isExpanded = !isExpanded
-                                        }
+//                                        .clickable {
+//                                            isExpanded = !isExpanded
+//                                        }
                                 ){
-                                    if(isExpanded) color.value = Violet200 else color.value = Cosmos100
+//                                    if(isExpanded) color.value = Violet200 else color.value = Cosmos100
                                 }
 
 
@@ -224,19 +179,28 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                                     fontFamily = comfortaa,
                                     modifier = Modifier.padding(start = 30.dp)
                                 )
-                                IconButton(modifier = Modifier.padding(end = 10.dp),
-                                    onClick = {
-                                    deletedItem.add(item)
-                                }) {
-                                    Icon(imageVector = Icons.Filled.Delete, contentDescription = "Удалить трекер")
-                                }
+//                                IconButton(modifier = Modifier.padding(end = 10.dp),
+//                                    onClick = {
+//                                    deletedItem.add(item)
+//                                }) {
+//                                    Icon(imageVector = Icons.Filled.Delete, contentDescription = "Удалить трекер")
+//                                }
                             }
                         }
                     }
-                }
+//                }
             })
         }
+
+
+
+
     }
+
+    ButtonAdd()
+
+
+
 }
 
 @Composable
@@ -248,6 +212,77 @@ fun VerticalGradient(){
         endY = 2800.0f
     )
     Box(modifier = Modifier.background(gradient))
+}
+
+@Composable
+fun TrackerList(){
+
+}
+
+@Composable
+fun CurrentDate(){
+    val calendar = Calendar.getInstance()
+
+    val year = calendar[Calendar.YEAR]
+    val month = calendar[Calendar.MONTH]
+    val dayOfMonth = calendar[Calendar.DAY_OF_MONTH]
+
+    var stringMonth: String? = null
+
+
+    Text(
+        text = "$dayOfMonth",
+        style = TextStyle(fontSize = 50.sp),
+        fontFamily = comfortaa,
+        color = Color.White
+    )
+
+    Column(modifier = Modifier
+        .padding(start = 4.dp, top = 20.dp)
+    ){
+
+        Text(
+            text = "$year",
+            style = TextStyle(fontSize = 15.sp),
+            fontFamily = comfortaa,
+            color = Color.White
+        )
+        when (month){
+            4 -> stringMonth = "мая"
+            5 -> stringMonth = "июня"
+            6 -> stringMonth = "июля"
+        }
+        Text(
+            text = "$stringMonth",
+            style = TextStyle(fontSize = 15.sp),
+            fontFamily = comfortaa,
+            color = Color.White
+        )
+
+
+    }
+}
+
+@Composable
+fun ButtonAdd(){
+    FloatingActionButton(
+        onClick = {
+            //кнопка добавить
+
+//                Toast.makeText(this@Column, "Кнопка нажата", Toast.LENGTH_SHORT)
+//                    .show()
+        },
+        modifier = Modifier.padding(top = 10.dp),
+        backgroundColor = Violet200,
+        elevation = FloatingActionButtonDefaults.elevation(
+            defaultElevation = 8.dp,
+            pressedElevation = 12.dp
+        )
+    ) {
+        Icon(imageVector = Icons.Default.Add,
+            contentDescription = "Кнопка добавить",
+            tint = Color.White)
+    }
 }
 
 
