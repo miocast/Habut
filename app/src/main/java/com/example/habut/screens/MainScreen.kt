@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
@@ -97,107 +98,102 @@ fun MainScreen(){
             }
         }
 
+        Text(modifier = Modifier
+            .padding(top = 40.dp)
+            .height(85.dp),
+            text = "Твои привычки",
+            fontFamily = comfortaa,
+            color = Color.White,
+            fontSize = 30.sp)
+
         TrackerItemsList(itemList = getListItems())
 
     }
+
 }
+
+
 
 @Composable
 fun TrackerItemsList(itemList: List<TrackerItems>){
 
     val deletedItem = remember { mutableStateListOf<TrackerItems>() }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(modifier = Modifier
-                .padding(top = 10.dp),
-            text = "Твои привычки",
-            fontFamily = comfortaa,
-            color = Color.White,
-            fontSize = 30.sp)
-
-    }
-
     Column() {
-
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.Top
-        ){
-            itemsIndexed(items = itemList,
-            itemContent = {_, item ->
+        ) {
+                itemsIndexed(items = itemList,
+                    itemContent = { index, item ->
 //                AnimatedVisibility(
 //                    visible = !deletedItem.contains(item),
 //                    enter = expandVertically(),
 //                    exit = shrinkVertically(animationSpec = tween(durationMillis = 200))
 //                )
 //                {
-                    Card(
-                        modifier = Modifier
-                            .height(80.dp)
-                            .fillMaxWidth()
-                            .padding(start = 22.dp, end = 22.dp, top = 10.dp, bottom = 4.dp)
-                            .clickable {
-                                Log.d("MyLog", "Жмакнули")
-                            },
-                        shape = RoundedCornerShape(100.dp),
-                        elevation = 5.dp
-                    ) {
-                        Box {
-                            Row (verticalAlignment = Alignment.CenterVertically){
+                        Card(
+                            modifier = Modifier
+                                .height(80.dp)
+                                .fillMaxWidth()
+                                .padding(start = 22.dp, end = 22.dp, top = 10.dp, bottom = 4.dp)
+                                .clickable {
+                                    Log.d("MyLog", "Жмакнули")
+                                },
+                            shape = RoundedCornerShape(100.dp),
+                            elevation = 5.dp
+                        ) {
+                            Box {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
 //                                var isExpanded by remember {
 //                                    mutableStateOf(false)
 //                                }
 
-                                var color = remember {
-                                    mutableStateOf(Violet200)
-                                }
+                                    var color = remember {
+                                        mutableStateOf(Violet200)
+                                    }
 
-                                Box(
-                                    modifier = Modifier
-                                        .padding(5.dp)
-                                        .size(56.dp)
-                                        .background(color = color.value, shape = CircleShape)
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(5.dp)
+                                            .size(56.dp)
+                                            .background(color = color.value, shape = CircleShape)
 //                                        .clickable {
 //                                            isExpanded = !isExpanded
 //                                        }
-                                ){
+                                    ) {
 //                                    if(isExpanded) color.value = Violet200 else color.value = Cosmos100
-                                }
+                                    }
 
 
-                                Text(
-                                    text = item.name,
-                                    color = Violet100,
-                                    fontFamily = comfortaa,
-                                    modifier = Modifier.padding(start = 30.dp)
-                                )
-//                                IconButton(modifier = Modifier.padding(end = 10.dp),
-//                                    onClick = {
-//                                    deletedItem.add(item)
-//                                }) {
-//                                    Icon(imageVector = Icons.Filled.Delete, contentDescription = "Удалить трекер")
+                                    Text(
+                                        text = item.name + " ${index + 1} ",
+                                        color = Violet100,
+                                        fontFamily = comfortaa,
+                                        modifier = Modifier.padding(start = 30.dp)
+                                    )
+
+//                                Box(){
+//                                    IconButton(modifier = Modifier
+//                                        .padding(end = 10.dp)
+//                                        .background(Color.Blue),
+//
+//                                        onClick = {
+//                                            deletedItem.add(item)
+//                                        }) {
+//                                        Icon(imageVector = Icons.Filled.Delete, contentDescription = "Удалить трекер")
+//                                    }
 //                                }
+                                }
                             }
                         }
-                    }
 //                }
-            })
-        }
-
+                    })
+            }
 
 
 
     }
-
-    ButtonAdd()
 
 
 
@@ -263,6 +259,8 @@ fun CurrentDate(){
     }
 }
 
+
+
 @Composable
 fun ButtonAdd(){
     FloatingActionButton(
@@ -272,7 +270,8 @@ fun ButtonAdd(){
 //                Toast.makeText(this@Column, "Кнопка нажата", Toast.LENGTH_SHORT)
 //                    .show()
         },
-        modifier = Modifier.padding(top = 10.dp),
+        modifier = Modifier.padding(top = 10.dp)
+        ,
         backgroundColor = Violet200,
         elevation = FloatingActionButtonDefaults.elevation(
             defaultElevation = 8.dp,
