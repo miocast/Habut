@@ -8,10 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun TrackerEdit() {
+fun TrackerScreen() {
     Text(
         modifier = Modifier.fillMaxSize().wrapContentHeight(),
-        text = "Создание трекера",
+        text = "Страница трекера",
         textAlign = TextAlign.Center
     )
 }

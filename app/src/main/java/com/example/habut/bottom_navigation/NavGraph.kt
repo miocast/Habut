@@ -9,6 +9,7 @@ import com.example.habut.screens.*
 @Composable
 fun NavGraph(navHostController: NavHostController){
     NavHost(navController = navHostController, startDestination = "screen_1"){
+        //bottom bar
         composable("screen_2"){
             StatisticsScreen()
         }
@@ -18,5 +19,15 @@ fun NavGraph(navHostController: NavHostController){
         composable("screen_3"){
             SleepTrackerScreen()
         }
+
+        //остальные экраны
+        composable("TrackerScreen"){
+            TrackerScreen()
+        }
+
+        composable("TrackerEdit"){
+            TrackerEdit()
+        }
+
     }
 }

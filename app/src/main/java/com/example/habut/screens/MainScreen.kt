@@ -3,11 +3,6 @@ package com.example.habut.screens
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.util.Log
-import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -35,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.TrackerItems
 import com.example.habut.bottom_navigation.BottomNavigationBar
@@ -45,7 +41,6 @@ import java.text.DateFormat
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Preview(showBackground = true)
 @Composable
 fun MainScreen(){
 
@@ -57,8 +52,6 @@ fun MainScreen(){
             VerticalGradient()
         }
     }
-
-
 
 
 
@@ -75,8 +68,6 @@ fun MainScreen(){
                 .padding(start = 30.dp, top = 10.dp)
 //                .background(Color.Blue)
             ) {
-
-
                 CurrentDate()
             }
 
@@ -99,14 +90,21 @@ fun MainScreen(){
         }
 
         Text(modifier = Modifier
-            .padding(top = 40.dp)
+            .padding(top = 20.dp)
             .height(85.dp),
             text = "Твои привычки",
             fontFamily = comfortaa,
             color = Color.White,
             fontSize = 30.sp)
 
-        TrackerItemsList(itemList = getListItems())
+        Box(modifier = Modifier.height(480.dp)) {
+            TrackerItemsList(itemList = getListItems())
+        }
+
+        val navController = rememberNavController()
+
+        ButtonAdd(navController = navController)
+
 
     }
 
@@ -117,7 +115,7 @@ fun MainScreen(){
 @Composable
 fun TrackerItemsList(itemList: List<TrackerItems>){
 
-    val deletedItem = remember { mutableStateListOf<TrackerItems>() }
+//    val deletedItem = remember { mutableStateListOf<TrackerItems>() }
 
     Column() {
         LazyColumn(
@@ -138,7 +136,7 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                                 .fillMaxWidth()
                                 .padding(start = 22.dp, end = 22.dp, top = 10.dp, bottom = 4.dp)
                                 .clickable {
-                                    Log.d("MyLog", "Жмакнули")
+
                                 },
                             shape = RoundedCornerShape(100.dp),
                             elevation = 5.dp
@@ -210,10 +208,6 @@ fun VerticalGradient(){
     Box(modifier = Modifier.background(gradient))
 }
 
-@Composable
-fun TrackerList(){
-
-}
 
 @Composable
 fun CurrentDate(){
@@ -260,15 +254,11 @@ fun CurrentDate(){
 }
 
 
-
 @Composable
-fun ButtonAdd(){
+fun ButtonAdd(navController: NavController) {
     FloatingActionButton(
         onClick = {
-            //кнопка добавить
-
-//                Toast.makeText(this@Column, "Кнопка нажата", Toast.LENGTH_SHORT)
-//                    .show()
+            navController.navigate("TrackerEdit")
         },
         modifier = Modifier.padding(top = 10.dp)
         ,

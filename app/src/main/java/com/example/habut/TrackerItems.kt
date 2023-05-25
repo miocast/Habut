@@ -17,12 +17,10 @@ fun getListItems() = listOf(
     TrackerItems(4,"Аапвп"),
     TrackerItems(5,"Миывпвп"),
     TrackerItems(6,"Ваприис"),
-    TrackerItems(7,"Мпертии"),
-    TrackerItems(8,"Впатитьимь"),
-    TrackerItems(9,"Ваымит"),
-    TrackerItems(10,"Верти"),
-    TrackerItems(11,"Мтьра"),
-    TrackerItems(12,"Векпро"),
+    TrackerItems(3,"Зарядка"),
+    TrackerItems(4,"Аапвп"),
+    TrackerItems(5,"Миывпвп"),
+    TrackerItems(6,"Ваприис"),
 
 
 )

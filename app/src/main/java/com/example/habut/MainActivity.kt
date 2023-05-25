@@ -55,6 +55,8 @@ class MainActivity : ComponentActivity() {
             ) {
                 NavGraph(navHostController = navController)
             }
+
+
         }
     }
 
