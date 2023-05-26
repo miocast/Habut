@@ -2,53 +2,50 @@ package com.example.habut.screens
 
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.rememberNavController
+import com.example.habut.ScreenNavigate
 import com.example.habut.TrackerItems
-import com.example.habut.bottom_navigation.BottomNavigationBar
-import com.example.habut.bottom_navigation.NavGraph
 import com.example.habut.getListItems
 import com.example.habut.ui.theme.*
-import java.text.DateFormat
+import com.example.habut.ui_components.BottomItem
+import com.example.habut.ui_components.BottomNavigationBar
+import com.example.habut.ui_components.NavGraph
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(){
+    val navController = rememberNavController()
+    ScreenNavigate(navHostController = navController)
 
     HabutTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
+
             VerticalGradient()
         }
     }
@@ -62,17 +59,16 @@ fun MainScreen(){
     ) {
         Row(modifier = Modifier
             .fillMaxWidth(),
-//            .background(Color.Green),
             horizontalArrangement = Arrangement.SpaceBetween){
             Row(modifier = Modifier
                 .padding(start = 30.dp, top = 10.dp)
-//                .background(Color.Blue)
             ) {
                 CurrentDate()
             }
 
             IconButton(
                 onClick = {
+                    navController.navigate(Routes.SETTINGS_SCREEN.route)
                 }, modifier = Modifier
                     .padding(top = 30.dp, start = 0.dp, end = 30.dp)
             ) {
@@ -80,9 +76,7 @@ fun MainScreen(){
 //                        painter = painterResource(id = R.drawable.ic_sync),
                     Icons.Filled.Settings,
                     modifier = Modifier
-//                        .padding(top = 30.dp, start = 0.dp, end = 30.dp)
                         .size(50.dp),
-//                        .background(Color.Yellow),
                     contentDescription = "Настройки",
                     tint = Color.White
                 )
@@ -100,10 +94,10 @@ fun MainScreen(){
         Box(modifier = Modifier.height(480.dp)) {
             TrackerItemsList(itemList = getListItems())
         }
+//        val navController = rememberNavController()
 
-        val navController = rememberNavController()
+        ButtonAdd(navController)
 
-        ButtonAdd(navController = navController)
 
 
     }
@@ -256,9 +250,12 @@ fun CurrentDate(){
 
 @Composable
 fun ButtonAdd(navController: NavController) {
+
+
+
     FloatingActionButton(
         onClick = {
-            navController.navigate("TrackerEdit")
+            navController.navigate(Routes.TRACKER_EDIT.route)
         },
         modifier = Modifier.padding(top = 10.dp)
         ,

@@ -1,4 +1,4 @@
-package com.example.habut.bottom_navigation
+package com.example.habut.ui_components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.BottomNavigation
