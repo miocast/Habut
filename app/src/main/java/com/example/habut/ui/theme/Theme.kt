@@ -35,6 +35,7 @@ fun HabutTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
         LightColorPalette
     }
 
+
     MaterialTheme(
         colors = colors,
         typography = Typography,

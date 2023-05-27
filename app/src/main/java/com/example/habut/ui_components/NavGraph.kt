@@ -12,26 +12,29 @@ import com.example.habut.ui.theme.Routes
 @Composable
 fun NavGraph(navHostController: NavHostController){
     val navController = rememberNavController()
-    NavHost(navController = navHostController, startDestination = "screen_1"){
+    NavHost(navController = navHostController, startDestination = BottomItem.MainScreen.route){
         //bottom bar
+        composable(BottomItem.MainScreen.route){
+            MainScreen()
+        }
+
         composable("screen_2"){
             StatisticsScreen()
         }
-        composable("screen_1"){
-            MainScreen()
-        }
+
         composable("screen_3"){
             SleepTrackerScreen()
         }
 
 
-//        composable(BottomItem.StatisticsScreen.route){
-//            StatisticsScreen(navController)
-//        }
-//
-//        composable(Routes.TRACKER_EDIT.route){
-//            TrackerEdit()
-//        }
+
+        composable(Routes.TRACKER_EDIT.route){
+            TrackerEdit()
+        }
+
+        composable(Routes.SETTINGS_SCREEN.route){
+            SettingsScreen()
+        }
 
     }
 }

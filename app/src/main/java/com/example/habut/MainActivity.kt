@@ -8,6 +8,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.screens.MainScreen
 import com.example.habut.ui_components.BottomNavigationBar
@@ -20,24 +21,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val navController = rememberNavController()
-
-            Scaffold(
-                bottomBar = {
-                    BottomNavigationBar(navController = navController)
-                }
-            ) {
-
-                NavGraph(navHostController = navController)
-
-            }
-
-
+            BotBarNav()
         }
     }
-
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun BotBarNav(){
+    val navController = rememberNavController()
+
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
+        }
+    ) {
+        NavGraph(navHostController = navController)
+    }
+}
 
 
 

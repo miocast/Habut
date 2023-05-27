@@ -23,18 +23,15 @@ import com.example.habut.ui_components.BottomItem
 @Composable
 fun ScreenNavigate(navHostController: NavHostController){
     val navController = rememberNavController()
-    NavHost(navController = navHostController, startDestination = BottomItem.StatisticsScreen.route){
+    NavHost(navController = navHostController, startDestination = Routes.MainScreen.route){
 
-        composable(BottomItem.StatisticsScreen.route){
-            StatisticsScreen()
+
+        composable(Routes.MainScreen.route){
+            MainScreen()
         }
 
         composable(Routes.TRACKER_EDIT.route){
             TrackerEdit()
-        }
-
-        composable(Routes.TRACKER_EDIT.route){
-            SettingsScreen()
         }
 
         composable(Routes.SETTINGS_SCREEN.route){
