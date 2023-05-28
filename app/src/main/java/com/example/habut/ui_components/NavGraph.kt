@@ -1,20 +1,17 @@
 package com.example.habut.ui_components
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.habut.screens.*
-import com.example.habut.ui.theme.Routes
+
 
 @Composable
-fun NavGraph(navHostController: NavHostController){
-    val navController = rememberNavController()
-    NavHost(navController = navHostController, startDestination = BottomItem.MainScreen.route){
+fun NavGraph(navController: NavHostController){
+    NavHost(navController = navController, startDestination = "screen_1"){
         //bottom bar
-        composable(BottomItem.MainScreen.route){
+        composable("screen_1"){
             MainScreen()
         }
 
@@ -28,13 +25,14 @@ fun NavGraph(navHostController: NavHostController){
 
 
 
-        composable(Routes.TRACKER_EDIT.route){
-            TrackerEdit()
-        }
 
-        composable(Routes.SETTINGS_SCREEN.route){
-            SettingsScreen()
-        }
+//        composable(Routes.TRACKER_EDIT.route){
+//            TrackerEdit()
+//        }
+//
+//        composable(Routes.SETTINGS_SCREEN.route){
+//            SettingsScreen()
+//        }
 
     }
 }
