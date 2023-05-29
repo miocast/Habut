@@ -50,13 +50,16 @@ fun SleepTrackerScreen(){
     }
 
     var visible by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
+
     val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
     val year = Calendar.getInstance().get(Calendar.YEAR)
     var date by remember {
-        mutableStateOf("")
+        mutableStateOf("${currentMonth + 1}/$year")
     }
+
+//    val openDialog = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -69,6 +72,7 @@ fun SleepTrackerScreen(){
             fontFamily = comfortaa,
             color = Color.White,
             fontSize = 30.sp)
+
 
         MonthPicker(
             visible = visible,
@@ -85,6 +89,7 @@ fun SleepTrackerScreen(){
 
         Text(
             text = date,
+            color = Color.White,
             modifier = Modifier
                 .clickable { visible = true }
         )
@@ -113,6 +118,7 @@ fun MonthPicker(
         "NOV",
         "DEC"
     )
+//    val openDialog = remember { mutableStateOf(false) }
 
     var month by remember {
         mutableStateOf(months[currentMonth])
@@ -125,13 +131,18 @@ fun MonthPicker(
     val interactionSource = remember {
         MutableInteractionSource()
     }
+
+//    Button(
+//        onClick = { openDialog.value = true }
+//    ) {
+//        Text("Удалить", fontSize = 22.sp)
+//    }
     
     if (visible) {
         AlertDialog(
             backgroundColor = Color.White,
             shape = RoundedCornerShape(10),
             title = {
-
             },
 
             text = {
@@ -241,6 +252,7 @@ fun MonthPicker(
                           .fillMaxWidth()
                           .padding(end = 20.dp, bottom = 30.dp),
                           horizontalArrangement = Arrangement.End){
+
                           OutlinedButton(
                               modifier = Modifier.padding(end = 20.dp),
                               onClick = {
@@ -257,6 +269,7 @@ fun MonthPicker(
                                   fontWeight = FontWeight.Medium
                               )
                           }
+
 
 
                           OutlinedButton(
@@ -285,28 +298,47 @@ fun MonthPicker(
 
                       }
             },
-            onDismissRequest = {}
+            onDismissRequest = {
+            }
         )
     }
 }
 
-@Composable
-fun Month(){
-    val calendar = Calendar.getInstance()
-    val month = calendar[Calendar.MONTH]
+//@Composable
+//fun Month(){
+//    val calendar = Calendar.getInstance()
+//    val month = calendar[Calendar.MONTH]
+//
+//    var stringMonth: String? = null
+//
+//    when (month){
+//        4 -> stringMonth = "Май"
+//        5 -> stringMonth = "Июнь"
+//        6 -> stringMonth = "Июль"
+//    }
+//    Text(
+//        text = "$stringMonth",
+//        style = TextStyle(fontSize = 15.sp),
+//        fontFamily = comfortaa,
+//        color = Color.White
+//    )
+//}
 
-    var stringMonth: String? = null
 
-    when (month){
-        4 -> stringMonth = "Май"
-        5 -> stringMonth = "Июнь"
-        6 -> stringMonth = "Июль"
-    }
-    Text(
-        text = "$stringMonth",
-        style = TextStyle(fontSize = 15.sp),
-        fontFamily = comfortaa,
-        color = Color.White
-    )
-}
+//var stringMonth: String? = null
+//
+//when (months.indexOf(month)){
+//    0 -> stringMonth = "Январь"
+//    1 -> stringMonth = "Февраль"
+//    2 -> stringMonth = "Март"
+//    3 -> stringMonth = "Апрель"
+//    4 -> stringMonth = "Май"
+//    5 -> stringMonth = "Июнь"
+//    6 -> stringMonth = "Июль"
+//    7 -> stringMonth = "Август"
+//    8 -> stringMonth = "Сентябрь"
+//    9 -> stringMonth = "Октябрь"
+//    10 -> stringMonth = "Ноябрь"
+//    11 -> stringMonth = "Декабрь"
+//}
 

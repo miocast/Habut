@@ -120,10 +120,24 @@ fun ButtonSettings(){
 }
 @Composable
 fun ButtonAdd() {
+    var visible by remember {
+        mutableStateOf(false)
+    }
+
+
+    TrackerEdit(
+        visible = visible,
+        confirmButtonClicked = {
+            visible = false
+        },
+        closeClicked = {
+            visible = false
+        }
+    )
 
     FloatingActionButton(
         onClick = {
-
+                  visible = true
         },
         modifier = Modifier.padding(top = 15.dp)
         ,
