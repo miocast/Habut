@@ -35,14 +35,17 @@ fun TrackerEdit(
         AlertDialog(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(600.dp),
+                .height(500.dp),
             backgroundColor = Color.White,
             shape = RoundedCornerShape(5),
             title = null,
             text = {
-                Column() {
+                Column(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(500.dp)) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
+                        .padding(top = 20.dp)
 //                        .padding(top = -5.dp)
                         ,
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -51,7 +54,7 @@ fun TrackerEdit(
 
                         Text(
                             modifier = Modifier
-                                .padding(start = 30.dp)
+                                .padding(start = 40.dp)
 //                                .fillMaxWidth()
                             ,
                             text = "Создание трекера",
@@ -61,7 +64,7 @@ fun TrackerEdit(
                         Icon(
                             modifier = Modifier
 //                                .fillMaxWidth()
-                                .size(35.dp)
+                                .size(25.dp)
                                 .clickable(
                                     onClick = {
                                         closeClicked()
@@ -70,6 +73,32 @@ fun TrackerEdit(
 
                             imageVector = Icons.Filled.Close,
                             contentDescription = null
+                        )
+                    }
+
+                    TextFieldView()
+
+
+                    Button(
+                        modifier = Modifier
+                            .padding(top = 20.dp)
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        onClick = {
+                            confirmButtonClicked(
+//                            название
+//                            напоминание
+//                            описание
+                            )
+                        },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Violet100),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text(
+                            text = "Сохранить",
+                            color = Color.White,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Medium
                         )
                     }
 
@@ -83,28 +112,7 @@ fun TrackerEdit(
             buttons = {
                 Column(
                 ) {
-                    Button(
-                        modifier = Modifier
-                            .padding(top = 400.dp, start = 10.dp, end = 10.dp)
-                            .fillMaxWidth()
-                            .height(50.dp),
-                        onClick = {
-                            confirmButtonClicked(
-//                            название
-//                            напоминание
-//                            описание
-                            )
-                        },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Violet100),
-                        shape = RoundedCornerShape(100.dp)
-                    ) {
-                        Text(
-                            text = "Сохранить",
-                            color = Color.White,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
+
                 }
             },
 
@@ -115,3 +123,65 @@ fun TrackerEdit(
 }
 
 
+@Composable
+fun TextFieldView(){
+    val nameState = remember { mutableStateOf("")}
+    val notificationState = remember { mutableStateOf("")}
+    val descriptionState = remember { mutableStateOf("")}
+    
+    Column(modifier = Modifier
+//        .height(80.dp)
+        .padding(top = 30.dp, bottom = 4.dp)
+    ) {
+        OutlinedTextField(value = nameState.value,modifier = Modifier
+//        .height(80.dp)
+            .padding(bottom = 10.dp),
+
+            shape = RoundedCornerShape(10.dp),
+            onValueChange = {
+                nameState.value = it
+            },
+            label = {
+                Text(text = "Название")
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Violet100,
+                unfocusedBorderColor = Color.Gray)
+
+        )
+
+        OutlinedTextField(value = notificationState.value,
+            modifier = Modifier
+//        .height(80.dp)
+                .padding(bottom = 10.dp),
+            shape = RoundedCornerShape(10.dp),
+            onValueChange = {
+                notificationState.value = it
+            },
+            label = {
+                Text(text = "Напоминание")
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Violet100,
+                unfocusedBorderColor = Color.Gray))
+
+        OutlinedTextField(
+            value = descriptionState.value,
+            modifier = Modifier
+                .padding(bottom = 10.dp)
+                .height(150.dp),
+            shape = RoundedCornerShape(10.dp),
+            onValueChange = {
+                descriptionState.value = it
+            },
+            label = {
+                Text(text = "Описание")
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Violet100,
+                unfocusedBorderColor = Color.Gray)
+
+        )
+    }
+
+}
