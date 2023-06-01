@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.Repository.Tracker
 import com.example.habut.Repository.TrackerViewModel
+import com.example.habut.screens.ButtonSettings
 import com.example.habut.screens.MainScreen
 import com.example.habut.screens.SettingsScreen
 import com.example.habut.screens.TrackerEdit
@@ -35,14 +36,24 @@ import com.example.habut.ui_components.BottomNavigationBar
 import com.example.habut.ui_components.NavGraph
 import java.util.*
 
+
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?, )
     {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            BotBarNav()
+            val navController = rememberNavController()
+
+            Scaffold(
+                bottomBar = {
+                    BottomNavigationBar(navController = navController)
+                }
+            ) {
+                NavGraph(navController = navController)
+            }
         }
     }
 }
@@ -80,23 +91,19 @@ class MainActivity : ComponentActivity() {
 //}
 
 
-
-
-
-
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun BotBarNav(){
-    val navController = rememberNavController()
-
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
-        }
-    ) {
-        NavGraph(navController = navController)
-    }
-}
+//@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+//@Composable
+//fun BotBarNav(){
+//    val navController = rememberNavController()
+//
+//    Scaffold(
+//        bottomBar = {
+//            BottomNavigationBar(navController = navController)
+//        }
+//    ) {
+//        NavGraph(navController = navController)
+//    }
+//}
 
 
 

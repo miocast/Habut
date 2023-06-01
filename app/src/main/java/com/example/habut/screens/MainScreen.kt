@@ -35,14 +35,18 @@ import com.example.habut.Repository.Tracker
 import com.example.habut.Repository.TrackerViewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.habut.TrackerItems
 import com.example.habut.getListItems
 import com.example.habut.ui.theme.*
+import com.example.habut.ui_components.BottomItem
+import com.example.habut.ui_components.NavGraph
+import com.example.habut.ui_components.Routes
 import java.util.*
 
 
 @Composable
-fun MainScreen(){
+fun MainScreen(navController: NavController){
 
     HabutTheme {
         Surface(
@@ -75,7 +79,7 @@ fun MainScreen(){
                 CurrentDate()
             }
 
-            ButtonSettings()
+            ButtonSettings(navController = navController)
         }
 
         Text(modifier = Modifier
@@ -87,7 +91,7 @@ fun MainScreen(){
             fontSize = 30.sp)
 
         Box(modifier = Modifier.height(480.dp)) {
-            TrackerItemsList(itemList = getListItems())
+            TrackerItemsList(itemList = getListItems(), navController = navController)
         }
 
         ButtonAdd()
@@ -100,15 +104,23 @@ fun MainScreen(){
 
 
 @Composable
-fun ButtonSettings(){
+fun ButtonSettings(navController: NavController){
+
+
+    val listItems = listOf(
+        Routes.SettingsScreen,
+        BottomItem.MainScreen
+    )
 
     IconButton(
         onClick = {
+            navController.navigate(Routes.SettingsScreen.route)
         },
 
         modifier = Modifier
             .padding(top = 25.dp, start = 0.dp, end = 30.dp)
     ) {
+
         Icon(
             Icons.Filled.Settings,
             modifier = Modifier
@@ -156,8 +168,7 @@ fun ButtonAdd() {
 
 
 @Composable
-fun TrackerItemsList(itemList: List<TrackerItems>){
-
+fun TrackerItemsList(itemList: List<TrackerItems>, navController: NavController){
     val deletedItem = remember { mutableStateListOf<TrackerItems>() }
 
     Column() {
@@ -179,10 +190,11 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
 //                            .fillMaxWidth()
                             .padding(start = 22.dp, end = 22.dp, top = 10.dp, bottom = 4.dp)
                             .clickable {
-
-                            },
+                                navController.navigate(Routes.TrackerScreen.route)
+                            }
+                        ,
                         shape = RoundedCornerShape(100.dp),
-                        elevation = 5.dp
+
                     ) {
                         Column() {
                             Row(
@@ -199,8 +211,7 @@ fun TrackerItemsList(itemList: List<TrackerItems>){
                                             color = Violet200,
                                             shape = CircleShape
                                         )
-                                        .clickable {
-                                        }
+                                        .clickable {}
                                 ) {
 
                                 }

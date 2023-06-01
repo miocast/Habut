@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.habut.getListItems
+import com.example.habut.items.SleepTrackerItem
 import com.example.habut.ui.theme.*
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -49,22 +51,27 @@ fun SleepTrackerScreen(){
         }
     }
 
+
     var visible by remember {
         mutableStateOf(false)
     }
 
     val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+
     val year = Calendar.getInstance().get(Calendar.YEAR)
     var date by remember {
         mutableStateOf("${currentMonth + 1}/$year")
     }
 
+
+
 //    val openDialog = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
+        horizontalAlignment = Alignment.CenterHorizontally
+//        verticalArrangement = Arrangement.Center
+    ) {
         Text(modifier = Modifier
             .padding(top = 50.dp)
             .height(85.dp),
@@ -74,11 +81,13 @@ fun SleepTrackerScreen(){
             fontSize = 30.sp)
 
 
+
         MonthPicker(
             visible = visible,
             currentMonth = currentMonth,
             currentYear = year,
             confirmButtonClicked = { month_, year_ ->
+
                 date = "$month_/$year_"
                 visible = false
             },
@@ -86,13 +95,32 @@ fun SleepTrackerScreen(){
                 visible = false
             }
         )
-
-        Text(
-            text = date,
-            color = Color.White,
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .clickable { visible = true }
-        )
+            .width(180.dp)
+            .fillMaxWidth()
+            .padding(start = 16.dp)
+            .background(
+                color = Violet100,
+                shape = CircleShape
+            )
+            .clickable { visible = true }
+
+        ){
+            Text(
+                text = date,
+
+                color = Color.White,
+                fontSize = 25.sp,
+                fontFamily = comfortaa,
+                textAlign = TextAlign.Center,
+            )
+        }
+
+        SleepTrackerItem()
+
 
     }
 }
@@ -105,24 +133,25 @@ fun MonthPicker(
     confirmButtonClicked: (Int, Int) -> Unit,
     cancelClicked: () -> Unit){
     val months = listOf(
-        "JAN",
-        "FEB",
-        "MAR",
-        "APR",
-        "MAY",
-        "JUN",
-        "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
+        "ЯНВ",
+        "ФЕВ",
+        "МАР",
+        "АПР",
+        "МАЙ",
+        "ИЮН",
+        "ИЮЛ",
+        "АВГ",
+        "СЕН",
+        "ОКТ",
+        "НОЯ",
+        "ДЕК"
     )
 //    val openDialog = remember { mutableStateOf(false) }
 
     var month by remember {
         mutableStateOf(months[currentMonth])
     }
+
 
     var year by remember {
         mutableStateOf(currentYear)
@@ -139,11 +168,14 @@ fun MonthPicker(
 //    }
     
     if (visible) {
+
         AlertDialog(
             backgroundColor = Color.White,
             shape = RoundedCornerShape(10),
             title = {
             },
+
+
 
             text = {
                    Column() {
@@ -269,7 +301,6 @@ fun MonthPicker(
                                   fontWeight = FontWeight.Medium
                               )
                           }
-
 
 
                           OutlinedButton(

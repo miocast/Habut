@@ -12,7 +12,7 @@ fun NavGraph(navController: NavHostController){
     NavHost(navController = navController, startDestination = "screen_1"){
         //bottom bar
         composable("screen_1"){
-            MainScreen()
+            MainScreen(navController = navController)
         }
 
         composable("screen_2"){
@@ -23,16 +23,20 @@ fun NavGraph(navController: NavHostController){
             SleepTrackerScreen()
         }
 
+        composable("screen_4"){
+            TrackerScreen()
+        }
+
+        composable("settings_screen"){
+            SettingsScreen()
+        }
+
+        composable("tracker_screen"){
+            TrackerScreen()
+        }
 
 
 
-//        composable(Routes.TRACKER_EDIT.route){
-//            TrackerEdit()
-//        }
-//
-//        composable(Routes.SETTINGS_SCREEN.route){
-//            SettingsScreen()
-//        }
 
     }
 }

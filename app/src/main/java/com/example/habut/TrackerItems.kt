@@ -11,13 +11,11 @@ data class TrackerItems(
 
 
 fun getListItems() = listOf(
-//    Tracker(1,"Чтение", "df", "dfsdg"),
     TrackerItems(2,"Медитация"),
     TrackerItems(3,"Зарядка"),
     TrackerItems(4,"Полив цветка"),
     TrackerItems(5,"Йога"),
     TrackerItems(6,"Маска"),
-    TrackerItems(3,"Скрабирование"),
     TrackerItems(4,"Чтение"),
     TrackerItems(5,"Прогулка"),
     TrackerItems(6,"Английский"),
