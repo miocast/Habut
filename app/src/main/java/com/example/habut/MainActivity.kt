@@ -30,7 +30,7 @@ import com.example.habut.Repository.TrackerViewModel
 import com.example.habut.screens.ButtonSettings
 import com.example.habut.screens.MainScreen
 import com.example.habut.screens.SettingsScreen
-import com.example.habut.screens.TrackerEdit
+import com.example.habut.screens.TrackerCreate
 import com.example.habut.ui.theme.*
 import com.example.habut.ui_components.BottomNavigationBar
 import com.example.habut.ui_components.NavGraph

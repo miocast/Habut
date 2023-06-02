@@ -1,32 +1,35 @@
 package com.example.habut.screens
 
-import android.graphics.Paint.Align
+import android.app.TimePickerDialog
+import android.content.Context
+import android.icu.util.Calendar
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.habut.R
 import com.example.habut.ui.theme.Violet100
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.example.habut.ui.theme.Cosmos100
+import com.example.habut.ui.theme.Violet200
 
 @Composable
-fun TrackerEdit(
+fun TrackerCreate(
     visible: Boolean,
     closeClicked: () -> Unit,
     confirmButtonClicked: () -> Unit
@@ -45,39 +48,32 @@ fun TrackerEdit(
                     .height(500.dp)) {
                     Row(modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 20.dp)
-//                        .padding(top = -5.dp)
-                        ,
+                        .padding(top = 20.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ){
 
-
                         Text(
                             modifier = Modifier
-                                .padding(start = 40.dp)
-//                                .fillMaxWidth()
-                            ,
+                                .padding(start = 40.dp),
                             text = "Создание трекера",
                             fontSize = 20.sp,
                             textAlign = TextAlign.Center
                         )
+
                         Icon(
                             modifier = Modifier
-//                                .fillMaxWidth()
                                 .size(25.dp)
                                 .clickable(
                                     onClick = {
                                         closeClicked()
                                     }
                                 ),
-
                             imageVector = Icons.Filled.Close,
                             contentDescription = null
                         )
                     }
 
                     TextFieldView()
-
 
                     Button(
                         modifier = Modifier
@@ -93,6 +89,7 @@ fun TrackerEdit(
                         },
                         colors = ButtonDefaults.buttonColors(backgroundColor = Violet100),
                         shape = RoundedCornerShape(10.dp)
+
                     ) {
                         Text(
                             text = "Сохранить",
@@ -102,22 +99,12 @@ fun TrackerEdit(
                         )
                     }
 
-
-                    //textfield и label
-
                 }
             },
 
+            buttons = {},
 
-            buttons = {
-                Column(
-                ) {
-
-                }
-            },
-
-            onDismissRequest = {
-            }
+            onDismissRequest = {}
         )
     }
 }
@@ -125,16 +112,15 @@ fun TrackerEdit(
 
 @Composable
 fun TextFieldView(){
+
     val nameState = remember { mutableStateOf("")}
-    val notificationState = remember { mutableStateOf("")}
+
     val descriptionState = remember { mutableStateOf("")}
     
     Column(modifier = Modifier
-//        .height(80.dp)
         .padding(top = 30.dp, bottom = 4.dp)
     ) {
         OutlinedTextField(value = nameState.value,modifier = Modifier
-//        .height(80.dp)
             .padding(bottom = 10.dp),
 
             shape = RoundedCornerShape(10.dp),
@@ -149,21 +135,6 @@ fun TextFieldView(){
                 unfocusedBorderColor = Color.Gray)
 
         )
-
-        OutlinedTextField(value = notificationState.value,
-            modifier = Modifier
-//        .height(80.dp)
-                .padding(bottom = 10.dp),
-            shape = RoundedCornerShape(10.dp),
-            onValueChange = {
-                notificationState.value = it
-            },
-            label = {
-                Text(text = "Напоминание")
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Violet100,
-                unfocusedBorderColor = Color.Gray))
 
         OutlinedTextField(
             value = descriptionState.value,
@@ -180,8 +151,79 @@ fun TextFieldView(){
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Violet100,
                 unfocusedBorderColor = Color.Gray)
-
         )
+
+    }
+    Row {
+
+        TimePicker()
+        enablingButton()
+
+    }
+}
+
+@Composable
+fun TimePicker(){
+    val calendar = Calendar.getInstance()
+    val hour = calendar[Calendar.HOUR_OF_DAY]
+    val minute = calendar[Calendar.MINUTE]
+
+    val context = LocalContext.current
+
+    val time = remember { mutableStateOf("") }
+    val timePickerDialog = TimePickerDialog(
+        context,
+        {_, hour : Int, minute: Int ->
+            time.value = "$hour:$minute"
+        }, hour, minute, true
+    )
+
+    Column (
+        modifier = Modifier
+//        .fillMaxWidth(),
+//        horizontalAlignment = Alignment.Start
+//        verticalArrangement = Arrangement.Center
+    ){
+//        Text(text = "ВЫБРАННОЕ ВРЕМЯ: ${time.value}")
+        OutlinedButton(
+            modifier = Modifier
+                .height(52.dp),
+            shape = RoundedCornerShape(10.dp),
+            border = BorderStroke(1.dp, color = Color.Gray),
+            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
+            onClick = {
+            timePickerDialog.show()
+            })
+        {
+            Text(
+                text = "${time.value}",
+                color = Color.Gray)
+        }
+    }
+}
+
+@Composable
+fun enablingButton(){
+    var isExpanded by remember {
+        mutableStateOf(false)
+    }
+    var label = remember { mutableStateOf("Выкл.  ")}
+    var color = remember {
+        mutableStateOf(Violet200)
     }
 
+
+    Button(
+                modifier = Modifier
+                    .height(52.dp),
+                shape = RoundedCornerShape(10.dp),
+        onClick = {
+            isExpanded = !isExpanded
+        })
+    {
+//        if(isExpanded) color.value = Violet200 else color.value = Cosmos100
+
+        if(isExpanded) label.value = "Вкл. " else label.value = "Выкл. "
+        Text(label.value + "уведомления")
+    }
 }
