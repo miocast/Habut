@@ -1,7 +1,6 @@
 package com.example.habut.screens
 
 import android.app.TimePickerDialog
-import android.content.Context
 import android.icu.util.Calendar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -13,7 +12,6 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -21,19 +19,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.habut.R
 import com.example.habut.ui.theme.Violet100
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
-import com.example.habut.ui.theme.Cosmos100
 import com.example.habut.ui.theme.Violet200
 
 @Composable
 fun TrackerCreate(
+//    trackerViewModel: TrackerViewModel,
     visible: Boolean,
     closeClicked: () -> Unit,
     confirmButtonClicked: () -> Unit
 ) {
+
     if (visible) {
         AlertDialog(
             modifier = Modifier
@@ -73,7 +72,16 @@ fun TrackerCreate(
                         )
                     }
 
-                    TextFieldView()
+                    var nameState = remember {
+                        TextFieldState()
+                    }
+
+                    Column(modifier = Modifier
+                        .padding(top = 30.dp, bottom = 4.dp)
+                    ) {
+                        TextFieldName(nameState)
+                    }
+
 
                     Button(
                         modifier = Modifier
@@ -81,11 +89,19 @@ fun TrackerCreate(
                             .fillMaxWidth()
                             .height(50.dp),
                         onClick = {
-                            confirmButtonClicked(
-//                            название
-//                            напоминание
-//                            описание
-                            )
+
+                            confirmButtonClicked()
+
+
+//                            confirmButtonClicked(
+//                                trackerViewModel.addTracker(
+//                                Tracker(
+//                                      id = 1,
+//                                    trackerName = "name",
+//                                )
+//                                )
+//                            )
+
                         },
                         colors = ButtonDefaults.buttonColors(backgroundColor = Violet100),
                         shape = RoundedCornerShape(10.dp)
@@ -109,23 +125,22 @@ fun TrackerCreate(
     }
 }
 
+class TextFieldState(){
+    var text: String by mutableStateOf("")
+}
 
 @Composable
-fun TextFieldView(){
+fun TextFieldName(nameState: TextFieldState = remember { TextFieldState() }){
 
-    val nameState = remember { mutableStateOf("")}
-
-    val descriptionState = remember { mutableStateOf("")}
-    
-    Column(modifier = Modifier
-        .padding(top = 30.dp, bottom = 4.dp)
-    ) {
-        OutlinedTextField(value = nameState.value,modifier = Modifier
+        OutlinedTextField(
+            value = nameState.text,
+            modifier = Modifier
             .padding(bottom = 10.dp),
 
             shape = RoundedCornerShape(10.dp),
             onValueChange = {
-                nameState.value = it
+
+                nameState.text = it
             },
             label = {
                 Text(text = "Название")
@@ -133,33 +148,7 @@ fun TextFieldView(){
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Violet100,
                 unfocusedBorderColor = Color.Gray)
-
         )
-
-        OutlinedTextField(
-            value = descriptionState.value,
-            modifier = Modifier
-                .padding(bottom = 10.dp)
-                .height(150.dp),
-            shape = RoundedCornerShape(10.dp),
-            onValueChange = {
-                descriptionState.value = it
-            },
-            label = {
-                Text(text = "Описание")
-            },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Violet100,
-                unfocusedBorderColor = Color.Gray)
-        )
-
-    }
-    Row {
-
-        TimePicker()
-        enablingButton()
-
-    }
 }
 
 @Composable
@@ -184,7 +173,6 @@ fun TimePicker(){
 //        horizontalAlignment = Alignment.Start
 //        verticalArrangement = Arrangement.Center
     ){
-//        Text(text = "ВЫБРАННОЕ ВРЕМЯ: ${time.value}")
         OutlinedButton(
             modifier = Modifier
                 .height(52.dp),
@@ -201,6 +189,7 @@ fun TimePicker(){
         }
     }
 }
+
 
 @Composable
 fun enablingButton(){
@@ -227,3 +216,56 @@ fun enablingButton(){
         Text(label.value + "уведомления")
     }
 }
+
+
+//@Composable
+//fun TextFieldView(){
+//
+//    val nameState = remember { mutableStateOf("")}
+//
+//    val descriptionState = remember { mutableStateOf("")}
+//
+//    Column(modifier = Modifier
+//        .padding(top = 30.dp, bottom = 4.dp)
+//    ) {
+//        OutlinedTextField(value = nameState.value,modifier = Modifier
+//            .padding(bottom = 10.dp),
+//
+//            shape = RoundedCornerShape(10.dp),
+//            onValueChange = {
+//                nameState.value = it
+//            },
+//            label = {
+//                Text(text = "Название")
+//            },
+//            colors = TextFieldDefaults.outlinedTextFieldColors(
+//                focusedBorderColor = Violet100,
+//                unfocusedBorderColor = Color.Gray)
+//
+//        )
+//
+//        OutlinedTextField(
+//            value = descriptionState.value,
+//            modifier = Modifier
+//                .padding(bottom = 10.dp)
+//                .height(150.dp),
+//            shape = RoundedCornerShape(10.dp),
+//            onValueChange = {
+//                descriptionState.value = it
+//            },
+//            label = {
+//                Text(text = "Описание")
+//            },
+//            colors = TextFieldDefaults.outlinedTextFieldColors(
+//                focusedBorderColor = Violet100,
+//                unfocusedBorderColor = Color.Gray)
+//        )
+//
+//    }
+//    Row {
+//
+//        TimePicker()
+//        enablingButton()
+//
+//    }
+//}

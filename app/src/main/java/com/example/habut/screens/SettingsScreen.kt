@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.habut.ui.theme.*
 
 @Composable
-fun SettingsScreen(){
+fun SettingScreen(){
     HabutTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -144,14 +144,6 @@ fun SettingsScreen(){
         }
 
 
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp, start = 40.dp),
-            text = "Выйти из аккаунта",
-            fontFamily = comfortaa,
-            color = Scarlet100,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp)
 
     }
 
