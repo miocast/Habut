@@ -15,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.main_screen.MainScreen
 import com.example.habut.ui.theme.*
-import com.example.habut.ui_components.BottomNavigationBar
-//import com.example.habut.ui_components.NavGraph
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

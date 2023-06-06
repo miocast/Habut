@@ -14,18 +14,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.habut.ui.theme.Violet100
-import com.example.habut.ui_components.BottomItem
 
 @Composable
 fun BottomNav (
-//    navController: NavController
+    navController: NavHostController
 ){
     val listItems = listOf(
-        BottomNavItem.StatisticsScreen,
-        BottomNavItem.MainScreen,
-        BottomNavItem.SleepTrackerScreen
+        BottomNavItem.StatisticsItem,
+        BottomNavItem.ListItem,
+        BottomNavItem.NoteItem,
+        BottomNavItem.SettingItem
+
     )
 
     BottomNavigation(
@@ -33,15 +35,18 @@ fun BottomNav (
             .height(105.dp),
         backgroundColor = Color.White) {
 
-//        val backStackEntry by navController.currentBackStackEntryAsState()
-//        val currentRoute = backStackEntry?.destination?.route
+
         listItems.forEach{ bottomNavItem ->
+
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+
             BottomNavigationItem(
-                selected = false,
-//                currentRoute == bottomNavItem.route,
+                selected = currentRoute == bottomNavItem.route,
+
                 modifier = Modifier.padding(bottom = 50.dp),
                 onClick = {
-//                    navController.navigate(bottomNavItem.route)
+                    navController.navigate(bottomNavItem.route)
                           },
                 icon = {
                     Icon(painter = painterResource(id = bottomNavItem.iconId), contentDescription = "Icon")
