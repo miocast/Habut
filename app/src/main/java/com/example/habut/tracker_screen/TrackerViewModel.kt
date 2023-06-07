@@ -25,6 +25,8 @@ class TrackerViewModel @Inject constructor(
     var trackerListItem: TrackerListItem? = null
     var listId: Int = -1
 
+    var itemText = mutableStateOf("")
+        private set
 
 
     init {
@@ -38,7 +40,7 @@ class TrackerViewModel @Inject constructor(
 
     var checkedItem = mutableStateOf(false)
 
-    fun OnEvent(
+    fun onEvent(
         event: TrackerEvent){
 
         when(event){
@@ -60,6 +62,9 @@ class TrackerViewModel @Inject constructor(
                 viewModelScope.launch {
                     repository.insertItem(event.item)
                 }
+            }
+            is TrackerEvent.OnTextChange -> {
+                itemText.value = event.text
             }
         }
 
