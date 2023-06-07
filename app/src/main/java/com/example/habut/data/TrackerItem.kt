@@ -8,8 +8,6 @@ import androidx.room.PrimaryKey
 data class TrackerItem(
     @PrimaryKey
     val id: Int? = null,
-    val name: String,
-    val day: String,
     val isDone: Boolean,
     val listId: Int
 )

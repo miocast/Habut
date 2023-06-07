@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -21,11 +22,13 @@ import com.example.habut.ui.theme.Cosmos100
 import com.example.habut.ui.theme.HabutTheme
 import com.example.habut.ui.theme.Violet100
 import com.example.habut.ui.theme.comfortaa
+import com.example.habut.utils.UiEvent
 import java.util.*
 
 @Composable
 fun TrackerListScreen(
-    viewModel: TrackerListViewModel = hiltViewModel()
+    viewModel: TrackerListViewModel = hiltViewModel(),
+    onNavigate: (String) -> Unit
 ) {
     HabutTheme {
         Surface(
@@ -43,6 +46,17 @@ fun TrackerListScreen(
     }
 
     val itemsList = viewModel.list.collectAsState(initial = emptyList())
+    LaunchedEffect(key1 = true){
+        viewModel.uiEvent.collect{uiEvent ->
+            when(uiEvent){
+                is UiEvent.Navigate -> {
+                    onNavigate(uiEvent.route)
+                }
+                else -> {}
+            }
+
+        }
+    }
 
     Column(
         verticalArrangement = Arrangement.Center

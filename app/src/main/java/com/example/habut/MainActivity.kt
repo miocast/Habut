@@ -14,6 +14,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.main_screen.MainScreen
+import com.example.habut.navigation.MainNavigationGraph
 import com.example.habut.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -22,18 +23,13 @@ import java.util.*
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-    override fun onCreate(savedInstanceState: Bundle?, )
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-
-
-            MainScreen()
+            MainNavigationGraph()
 
         }
-
-
     }
 }
 

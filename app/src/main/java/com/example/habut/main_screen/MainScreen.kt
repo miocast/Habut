@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.habut.dialog.MainDialog
 import com.example.habut.navigation.NavigationGraph
@@ -19,6 +20,7 @@ import com.example.habut.ui.theme.Violet200
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
+    mainNavHostController: NavHostController,
     viewModel: MainScreenViewModel = hiltViewModel()
 
 ){
@@ -48,7 +50,9 @@ fun MainScreen(
         floatingActionButtonPosition = FabPosition.Center
 
     ) {
-        NavigationGraph(navController)
+        NavigationGraph(navController){ route ->
+            mainNavHostController.navigate(route)
+        }
         MainDialog(viewModel)
     }
 }

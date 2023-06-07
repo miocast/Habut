@@ -7,4 +7,5 @@ object Routes {
     const val TRACKER_ITEM = "tracker_item"
     const val NEW_NOTE = "new_note"
     const val STATISTICS = "statistics"
+    const val MAIN_SCREEN = "main_screen"
 }

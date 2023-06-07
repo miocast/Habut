@@ -39,7 +39,11 @@ fun UiTrackerListItem(
             .height(80.dp)
             .padding(start = 22.dp, end = 22.dp, top = 10.dp, bottom = 4.dp)
             .clickable {
-//            navController.navigate(Routes.TrackerScreen.route)
+                onEvent(
+                    TrackerListEvent.OnItemClick(
+                        Routes.TRACKER_ITEM + "/${item.id}" + "/${item.name}"
+                    )
+                )
             },
         shape = RoundedCornerShape(100.dp)
 
@@ -57,27 +61,15 @@ fun UiTrackerListItem(
                         .size(56.dp)
                 ) {
                     Checkbox(
+                        modifier = Modifier.size(30.dp),
                         checked = item.isCheck,
                         onCheckedChange = { isChecked ->
-//                        onEvent(AddItemEvent.OnCheckedChange(item.copy(isCheck = isChecked)))
+                            onEvent(TrackerListEvent.OnCheckedChange(item.copy(isCheck = isChecked)))
                         }
                     )
                 }
 
 
-                // CHECKBOX
-
-
-//                Box(
-//                    modifier = Modifier
-//                        .padding(5.dp)
-//                        .size(56.dp)
-//                        .background(
-//                            color = Violet200,
-//                            shape = CircleShape
-//                        )
-//                        .clickable {}
-//                ) {}
 
                 Text(
                     modifier = Modifier

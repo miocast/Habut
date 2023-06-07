@@ -22,7 +22,6 @@ class TrackerListViewModel @Inject constructor(
     val list = repository.getAllItems()
 
     private val _uiEvent = Channel<UiEvent>()
-    //приемник (получатель)
     val uiEvent = _uiEvent.receiveAsFlow()
 
     private var listItem: TrackerListItem? = null
@@ -49,6 +48,11 @@ class TrackerListViewModel @Inject constructor(
                             listItem?.isCheck ?: false
                         )
                     )
+                }
+            }
+            is TrackerListEvent.OnCheckedChange -> {
+                viewModelScope.launch{
+                    repository.insertItem(event.item)
                 }
             }
             is TrackerListEvent.OnItemClick -> {

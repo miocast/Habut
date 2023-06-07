@@ -12,10 +12,12 @@ import com.example.habut.tracker_list_screen.TrackerListScreen
 import com.example.habut.utils.Routes
 
 @Composable
-fun NavigationGraph(navController: NavHostController) {
+fun NavigationGraph(navController: NavHostController, onNavigate: (String) -> Unit) {
     NavHost(navController = navController, startDestination = Routes.TRACKER_LIST){
         composable (Routes.TRACKER_LIST) {
-            TrackerListScreen()
+            TrackerListScreen(){route ->
+                onNavigate(route)
+            }
         }
 
         composable (Routes.NOTE_LIST) {
