@@ -11,7 +11,7 @@ class TrackerListRepoImpl (
     }
 
     override suspend fun deleteItem(item: TrackerListItem) {
-        dao.deleteItem(item)
+        dao.deleteTrackerList(item)
     }
 
     override fun getAllItems(): Flow<List<TrackerListItem>> {

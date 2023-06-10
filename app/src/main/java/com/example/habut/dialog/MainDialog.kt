@@ -18,6 +18,8 @@ import com.example.habut.ui.theme.comfortaa
 fun MainDialog(
     dialogController: DialogController
 ){
+    val maxLength = 5
+
     if (dialogController.openDialog.value){
         AlertDialog(onDismissRequest = {
             dialogController.onDialogEvent(DialogEvent.OnCancel)
@@ -42,6 +44,7 @@ fun MainDialog(
                         onValueChange = {text ->
                             dialogController.onDialogEvent(DialogEvent.OnTextChange(text))
                         },
+
                         label = {
                             Text(text = "Название")
                         },

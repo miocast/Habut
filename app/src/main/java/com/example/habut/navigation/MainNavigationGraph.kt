@@ -9,7 +9,6 @@ import androidx.navigation.navArgument
 import com.example.habut.main_screen.MainScreen
 import com.example.habut.new_note_screen.NewNoteScreen
 import com.example.habut.note_list_screen.NoteListScreen
-import com.example.habut.screens.StatisticsScreen
 import com.example.habut.settings_screen.SettingsScreen
 import com.example.habut.tracker_list_screen.TrackerListScreen
 import com.example.habut.tracker_screen.TrackerScreen

@@ -62,7 +62,7 @@ class TrackerListViewModel @Inject constructor(
                 listItem = event.item
                 openDialog.value = true
                 editableText.value = listItem?.name ?: ""
-                dialogTitle.value = "Название трекера:"
+                dialogTitle.value = "Редактирование трекера:"
                 showEditableText.value = true
             }
             is TrackerListEvent.OnShowDeleteDialog -> {

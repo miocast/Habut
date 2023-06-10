@@ -23,7 +23,6 @@ fun BottomNav (
     navController: NavHostController
 ){
     val listItems = listOf(
-        BottomNavItem.StatisticsItem,
         BottomNavItem.ListItem,
         BottomNavItem.NoteItem,
         BottomNavItem.SettingItem

@@ -50,36 +50,33 @@ fun UiTrackerListItem(
     ) {
         Column {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .padding(top = 7.dp)
+                    .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
 
-                Box(
+                Checkbox(
                     modifier = Modifier
-                        .padding(start = 10.dp, top = 10.dp)
-                        .size(56.dp)
-                ) {
-                    Checkbox(
-                        modifier = Modifier.size(30.dp),
-                        checked = item.isCheck,
-                        onCheckedChange = { isChecked ->
-                            onEvent(TrackerListEvent.OnCheckedChange(item.copy(isCheck = isChecked)))
-                        }
-                    )
-                }
-
-
+                        .size(50.dp)
+                        .padding(start = 20.dp),
+                    checked = item.isCheck,
+                    onCheckedChange = { isChecked ->
+                        onEvent(TrackerListEvent.OnCheckedChange(item.copy(isCheck = isChecked)))
+                    }
+                )
 
                 Text(
                     modifier = Modifier
-                        .width(190.dp)
+                        .padding(bottom = 0.dp, top = 0.dp, start = 30.dp)
+                        .width(170.dp)
                         .fillMaxWidth()
-                        .padding(bottom = 5.dp, start = 20.dp),
+                        ,
                     text = item.name,
                     textAlign = TextAlign.Start,
                     color = Violet100,
-                    fontFamily = comfortaa
+                    fontFamily = comfortaa,
                 )
 
                 IconButton(
@@ -94,6 +91,8 @@ fun UiTrackerListItem(
                 }
 
                 IconButton(
+                    modifier = Modifier
+                        .padding(bottom = 0.dp, end = 0.dp),
                     onClick = {
                         onEvent(TrackerListEvent.OnShowDeleteDialog(item))
                     }

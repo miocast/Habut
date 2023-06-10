@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -79,7 +80,7 @@ fun TrackerListScreen(
         Text(
             modifier = Modifier
                 .padding(
-                    start = 50.dp,
+                    start = 70.dp,
                     top = 16.dp
                 )
                 .height(85.dp),
@@ -107,10 +108,18 @@ fun TrackerListScreen(
 
             MainDialog(viewModel)
         }
-
-
     }
 
+    if (itemsList.value.isEmpty()) {
+        Text(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentHeight(),
+            text = "Пусто",
+            fontSize = 25.sp,
+            textAlign = TextAlign.Center
+        )
+    }
 
 }
 

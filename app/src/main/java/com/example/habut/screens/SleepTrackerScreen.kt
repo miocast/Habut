@@ -163,11 +163,6 @@ fun MonthPicker(
         MutableInteractionSource()
     }
 
-//    Button(
-//        onClick = { openDialog.value = true }
-//    ) {
-//        Text("Удалить", fontSize = 22.sp)
-//    }
 
     if (visible) {
 
