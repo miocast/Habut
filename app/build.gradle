@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.habut'
+    namespace 'com.miocast.habut'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.habut"
+        applicationId "com.miocast.habut"
         minSdk 24
         targetSdk 33
         versionCode 1
