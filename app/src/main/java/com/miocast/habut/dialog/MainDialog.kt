@@ -18,7 +18,6 @@ import com.miocast.habut.ui.theme.comfortaa
 fun MainDialog(
     dialogController: DialogController
 ){
-    val maxLength = 5
 
     if (dialogController.openDialog.value){
         AlertDialog(onDismissRequest = {
@@ -40,6 +39,8 @@ fun MainDialog(
                     if (dialogController.showEditableText.value)
 
                         TextField(
+                            modifier = Modifier
+                                .fillMaxWidth(),
                         value = dialogController.editableText.value,
                         onValueChange = {text ->
                             dialogController.onDialogEvent(DialogEvent.OnTextChange(text))

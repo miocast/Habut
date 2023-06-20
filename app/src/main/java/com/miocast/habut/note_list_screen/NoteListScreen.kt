@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -44,8 +45,6 @@ fun NoteListScreen(
 
     val itemsList = viewModel.noteList.collectAsState(initial = emptyList())
 
-//    val scaffoldState = rememberScaffoldState()
-
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { uiEven ->
             when (uiEven) {
@@ -60,6 +59,7 @@ fun NoteListScreen(
 
 
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
             .background(Violet100)
@@ -67,10 +67,6 @@ fun NoteListScreen(
 
         Text(
             modifier = Modifier
-                .padding(
-                    start = 115.dp,
-                    top = 16.dp
-                )
                 .height(60.dp),
             text = "Заметки",
             fontFamily = comfortaa,
@@ -99,16 +95,7 @@ fun NoteListScreen(
         }
         MainDialog(viewModel)
 
-//            if(viewModel.noteList.isEmpty()){
-//                Text(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .wrapContentHeight(),
-//                    text = "Empty",
-//                    fontSize = 25.sp,
-//                    textAlign = TextAlign.Center
-//                )
-//            }
+
     }
 
 

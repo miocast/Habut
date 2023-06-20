@@ -54,15 +54,12 @@ android {
 
 
 dependencies {
-//    constraints{
-//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0"){
-//            because("kotlin-stdlib-jdk7 is now a part of stdlib")
-//        }
-//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10"){
-//            because("kotlin-stdlib-jdk7 is now a part of stdlib")
-//        }
-//    }
 
+    //реклама от Яндекс
+//    implementation 'com.yandex.android:mobileads:5.8.0'
+//    implementation 'com.yandex.ads.adapter:admob-mobileads:5.8.0.0'
+//
+    implementation 'com.google.android.gms:play-services-ads-lite:22.1.0'
 
 
 

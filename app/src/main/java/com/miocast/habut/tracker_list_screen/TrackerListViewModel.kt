@@ -44,7 +44,6 @@ class TrackerListViewModel @Inject constructor(
                         TrackerListItem(
                             listItem?.id,
                             editableText.value,
-                            "12:30",
                             listItem?.isCheck ?: false
                         )
                     )

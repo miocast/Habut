@@ -45,7 +45,6 @@ class MainScreenViewModel @Inject constructor(
                         TrackerListItem(
                             null,
                             editableText.value,
-                            "12:30",
                             false
                         )
                     )

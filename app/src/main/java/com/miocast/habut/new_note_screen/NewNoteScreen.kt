@@ -26,20 +26,6 @@ fun NewNoteScreen(
     viewModel: NewNoteViewModel = hiltViewModel(),
     onPopBackStack: () -> Unit
 ) {
-//    HabutTheme {
-//        Surface(
-//            modifier = Modifier.fillMaxSize(),
-//            color = MaterialTheme.colors.background
-//        ) {
-//            val gradient = Brush.verticalGradient(
-//                0.0f to Violet100,
-//                1.0f to Cosmos100,
-//                startY = 0.0f,
-//                endY = 2800.0f
-//            )
-//            Box(modifier = Modifier.background(gradient))
-//        }
-//    }
 
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true){
@@ -62,7 +48,7 @@ fun NewNoteScreen(
         SnackbarHost(hostState = scaffoldState.snackbarHostState){ data ->
             Snackbar(
                 snackbarData = data,
-                backgroundColor = Violet200
+                backgroundColor = Color.Red
             )
         }
     }) {

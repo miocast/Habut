@@ -1,7 +1,6 @@
 package com.miocast.habut.data
 
 import androidx.room.*
-
 @Database(
     entities = [
         TrackerListItem::class,

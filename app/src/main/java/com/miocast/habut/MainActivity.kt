@@ -20,12 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 
+const val AD_ID = "ca-app-pub-3940256099942544/5224354917"
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             MainNavigationGraph()
 
@@ -33,16 +33,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-//val navController = rememberNavController()
-//
-//Scaffold(
-//bottomBar = {
-//    BottomNavigationBar(navController = navController)
-//}
-//) {
-//    NavGraph(navController = navController)
-//}
 
 
 

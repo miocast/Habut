@@ -9,6 +9,5 @@ data class TrackerListItem(
     @PrimaryKey
     val id: Int? = null,
     val name: String,
-    val date: String,
     val isCheck: Boolean
 )

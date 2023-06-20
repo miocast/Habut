@@ -54,7 +54,7 @@ class NewNoteViewModel @Inject constructor(
                 viewModelScope.launch {
                     if (title.isEmpty()){
                         sendUiEvent(UiEvent.ShowSnackBar(
-                            "Title can not be empty!"
+                            "Поле не может быть пустым!"
                         ))
                         return@launch
                     }
